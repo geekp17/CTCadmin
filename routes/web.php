@@ -16,3 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/lugger/edit', 'LuggerController@edit');
+Route::get('/lugger/add', 'LuggerController@add');
+
+Route::get('/clubber/add', 'ClubberController@add');
+
+Route::post('/clubber/insert', 'ClubberController@insert');

@@ -9,4 +9,8 @@ class LuggerController extends Controller
     public function edit(){
       return view('luggers.edit');
     }
+
+    public function add(){
+      return view('luggers.add');
+    }
 }

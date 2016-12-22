@@ -18,6 +18,8 @@ class CreateLuggersTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('mobileNo')->unique();
+            $table->date('dob');
+            $table->string('address');
             $table->integer('user_id');
             $table->timestamps();
         });
