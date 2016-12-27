@@ -7,17 +7,20 @@
   </div>
 </div>
 </div>
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="{{ action('ClubberController@levelUp') }}">
+
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
   <div class="form-group">
+
     <label class="control-label col-sm-2">Lug Leader</label>
     <div class="col-sm-10">
-      <input class="form-control" id="user_id" type="text">
+      <input class="form-control" name="user_id" type="text">
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2">Clubber Id</label>
     <div class="col-sm-10">
-      <input class="form-control" id="clubber_id" type="text">
+      <input class="form-control" name="clubber_id" type="text">
     </div>
   </div>
   <div class="form-group">
@@ -31,41 +34,42 @@
       <h2>OR</h2>
   </div>
 </div>
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="{{ action('LuggerController@insert') }}">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div class="form-group">
       <label class="control-label col-sm-2">First Name</label>
       <div class="col-sm-10">
-        <input class="form-control" id="firstName" type="text">
+        <input class="form-control" name="firstName" type="text">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2">Last Name</label>
       <div class="col-sm-10">
-        <input class="form-control" id="lastName" type="text">
+        <input class="form-control" name="lastName" type="text">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2">Mobile Number</label>
       <div class="col-sm-10">
-        <input class="form-control" id="mobileNo" type="text">
+        <input class="form-control" name="mobileNo" type="text">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2">Date of Birth</label>
       <div class="col-sm-10">
-        <input class="form-control" id="dob" type="date">
+        <input class="form-control" name="dob" type="date">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2">Address</label>
       <div class="col-sm-10">
-        <textarea class="form-control" rows="4" cols="50" id="address"></textarea>
+        <textarea class="form-control" rows="4" cols="50" name="address"></textarea>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2">Lug Leader</label>
       <div class="col-sm-10">
-        <input class="form-control" id="user_id" type="text">
+        <input class="form-control" name="user_id" type="text">
       </div>
     </div>
     <div class="form-group">
@@ -74,4 +78,22 @@
       </div>
     </div>
 </form>
+@if (session('status'))
+    <div class="row">
+      <div class="alert alert-success">
+          {{ session('status') }}
+      </div>
+    </div>
+@endif
+@if (count($errors) > 0)
+    <div class="row">
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    </div>
+@endif
 @stop

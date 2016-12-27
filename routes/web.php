@@ -14,10 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/lugger/edit', 'LuggerController@edit');
+Route::get('/lugger', 'LuggerController@index');
+Route::get('/lugger/{id}/edit', 'LuggerController@edit');
 Route::get('/lugger/add', 'LuggerController@add');
+Route::post('/lugger/insert', 'LuggerController@insert');
 
 Route::get('/clubber/add', 'ClubberController@add');
-
-Route::post('/clubber/insert', 'ClubberController@insert');
+Route::post('/clubber/insert', "ClubberController@insert");
+Route::post('/clubber/levelUp', "ClubberController@levelUp");

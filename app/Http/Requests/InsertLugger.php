@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InsertClubber extends FormRequest
+class InsertLugger extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,17 @@ class InsertClubber extends FormRequest
     public function rules()
     {
         return [
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'mobileNo' =>'required|size:10|unique:clubbers',
-            'address' => 'required',
-            'dob' => 'required'
+          'firstName' => 'required',
+          'lastName' => 'required',
+          'mobileNo' =>'required|size:10|unique:clubbers',
+          'address' => 'required',
+          'dob' => 'required'
         ];
     }
 
     public function messages(){
       return [
-        'mobileNo.unique' => 'Clubber already in database.'
+        'mobileNo.unique' => 'Lugger already in database.'
       ];
     }
 }

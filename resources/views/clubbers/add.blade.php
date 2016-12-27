@@ -6,7 +6,7 @@
       <h1>Clubber Registration Form</h2>
   </div>
 </div>
-<form class="form-horizontal" method="post" action="/clubber/insert">
+<form class="form-horizontal" method="post" action="{{ action('ClubberController@insert')}}">
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
     <div class="form-group">
@@ -51,15 +51,22 @@
       </div>
     </div>
 </form>
-
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+    <div class="row">
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
     </div>
 @endif
-
+@if (session('status'))
+    <div class="row">
+      <div class="alert alert-success">
+          {{ session('status') }}
+      </div>
+    </div>
+@endif
 @stop
