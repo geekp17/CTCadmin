@@ -22,3 +22,5 @@ Route::post('/lugger/insert', 'LuggerController@insert');
 Route::get('/clubber/add', 'ClubberController@add');
 Route::post('/clubber/insert', "ClubberController@insert");
 Route::post('/clubber/levelUp', "ClubberController@levelUp");
+
+Auth::routes();

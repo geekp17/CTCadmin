@@ -44,7 +44,7 @@
       <div class="col-sm-10">
         <input class="form-control" name="lugger_id" type="text">
       </div>
-    </div
+    </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-2">
           <button type="submit" class="btn btn-default">Submit</button>
