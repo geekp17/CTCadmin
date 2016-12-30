@@ -18,6 +18,7 @@
            <li><a href="#">Home</a></li>
            <li><a href="#">Lugger</a></li>
            <li><a href="#">Clubber</a></li>
+           <li><a href="#">Log</a></li>
          </ul>
          @if (Auth::check())
          <ul class="nav navbar-nav navbar-right">
