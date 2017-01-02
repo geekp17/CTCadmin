@@ -8,25 +8,46 @@ $log1 = $lugger->Log()->where([
     ['lugger_id', '=', $lugger->id],
     ['meet', '=', $meet],
     ])->first();
+$efforts1 = new App\Effort()->where('log_id', '=', $log1->id)->get();
+$effort1 = "";
+foreach($efforts2 as $effort) {
+  $effort1 = $effort1."<br>".$effort;
+}
 
 $meet = date("n").'-'.date("y").'meet2';
 $log2 = $lugger->Log()->where([
     ['lugger_id', '=', $lugger->id],
     ['meet', '=', $meet],
     ])->first();
+$efforts2 = new App\Effort()->where('log_id', '=', $log2->id)->get();
+$effort2 = "";
+foreach($efforts1 as $effort) {
+  $effort2 = $effort2."<br>".$effort;
+}
 
 $meet = date("n").'-'.date("y").'meet3';
 $log3 = $lugger->Log()->where([
     ['lugger_id', '=', $lugger->id],
     ['meet', '=', $meet],
     ])->first();
+$efforts3 = new App\Effort()->where('log_id', '=', $log3->id)->get();
+$effort3 = "";
+foreach($efforts3 as $effort) {
+  $effort3 = $effort3."<br>".$effort;
+}
+
 
 $meet = date("n").'-'.date("y").'meet4';
 $log4 = $lugger->Log()->where([
     ['lugger_id', '=', $lugger->id],
     ['meet', '=', $meet],
     ])->first();
-var_dump($log4->toArray());
+$efforts4 = new App\Effort()->where('log_id', '=', $log4->id)->get();
+$effort4 = "";
+foreach($efforts4 as $effort) {
+  $effort4 = $effort4."<br>".$effort;
+}
+
 @endphp
 <div class="row">
   <div class="col-sm-12">
@@ -46,10 +67,10 @@ var_dump($log4->toArray());
   <tbody>
     <tr>
       <th>Effort Made to Meet</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>{{$efort1}}</th>
+      <th>{{$efort2}}</th>
+      <th>{{$efort3}}</th>
+      <th>{{$efort4}}</th>
     </tr>
     <tr>
       <th>Date</th>
@@ -81,10 +102,10 @@ var_dump($log4->toArray());
     </tr>
     <tr>
       <th>Sharing (Accountability)</th>
-      <th>{{$log1->studyTaken}}</th>
-      <th>{{$log2->studyTaken}}</th>
-      <th>{{$log3->studyTaken}}</th>
-      <th>{{$log4->studyTaken}}</th>
+      <th>{{$log1->sharing}}</th>
+      <th>{{$log2->sharing}}</th>
+      <th>{{$log3->sharing}}</th>
+      <th>{{$log4->sharing}}</th>
     </tr>
     <tr>
       <th>Comments</th>
@@ -95,10 +116,10 @@ var_dump($log4->toArray());
     </tr>
     <tr>
       <th></th>
-      <th><a href="#meet1" class="btn btn-primary" >Edit</a></th>
-      <th><a href="#meet2" class="btn btn-primary" >Edit</a></th>
-      <th><a href="#meet3" class="btn btn-primary" >Edit</a></th>
-      <th><a href="#meet4" class="btn btn-primary" >Edit</a></th>
+      <th><a href="{{ url('log/edit', [$log1->id]) }}" class="btn btn-primary" >Edit/Add</a></th>
+      <th><a href="{{ url('log/edit', [$log2->id]) }}" class="btn btn-primary" >Edit/Add</a></th>
+      <th><a href="{{ url('log/edit', [$log3->id]) }}" class="btn btn-primary" >Edit/Add</a></th>
+      <th><a href="{{ url('log/edit', [$log4->id]) }}" class="btn btn-primary" >Edit/Add</a></th>
     </tr>
   </tbody>
 </table>

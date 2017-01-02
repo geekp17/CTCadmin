@@ -23,7 +23,7 @@ Route::get('/clubber/add', 'ClubberController@add');
 Route::post('/clubber/insert', "ClubberController@insert");
 Route::post('/clubber/levelUp', "ClubberController@levelUp");
 
-Route::get('/log/add', 'LogController@add');
+Route::get('/log/edit/{id}', 'LogController@edit');
 Route::post('/log/insert', 'LogController@insert');
 Route::get('/log', 'LogController@index');
 

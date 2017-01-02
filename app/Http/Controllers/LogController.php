@@ -12,11 +12,12 @@ use App\Request\InsertLog;
 
 class LogController extends Controller
 {
-    public function add(){
-      $user = Auth::user();
-      $lugger = new Lugger();
-      $luggers = $user->Lugger()->get();
-      return view('logs.add')->with('luggers', $luggers);
+    public function edit($id){
+      $log = new Log()->where(['id', '=', $id])->first();
+      if(is_null($log->date())) {
+        return view('logs.add')->with('log', $log);
+      }
+
     }
 
     public function insert(Request $request){

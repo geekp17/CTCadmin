@@ -11,12 +11,7 @@
   <div class="form-group">
     <label class="control-label col-sm-2">Lugger's Name</label>
     <div class="col-sm-10">
-      <select onchange="report(this.value)" class="form-control" name="lugger_id">
-        <option></option>
-        @foreach ($luggers as $lugger)
-        <option value="{{$lugger->id}}">{{ucfirst(strtolower($lugger->firstName))}}</option>
-        @endforeach
-      </select>
+      <input class="form-control" name="lugger_id" value='{{ $log->Lugger()->first_name}}'>
     </div>
   </div>
 
@@ -37,7 +32,7 @@
   <div class="form-group">
     <label class="control-label col-sm-2">Who else turned up?</label>
     <div class="col-sm-10">
-        @foreach ($luggers as $lugger)
+        @foreach ($log->User()->getLuggers() as $lugger)
         <label id="{{$lugger->id}}" class="checkbox-inline">
           <input name="other[]" type="checkbox">{{ucfirst(strtolower($lugger->firstName))}}
         </label>

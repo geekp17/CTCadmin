@@ -16,4 +16,8 @@ class Lugger extends Model
     public function Log(){
       return $this->HasMany('App\Log');
     }
+    public function getonesfirstName()
+    {
+        return $this->get_attribute('firstName');
+    }
 }
