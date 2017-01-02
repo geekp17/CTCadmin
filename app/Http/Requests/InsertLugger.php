@@ -25,10 +25,11 @@ class InsertLugger extends FormRequest
     {
         return [
           'firstName' => 'required',
-          'lastName' => 'required',
-          'mobileNo' =>'required|size:10|unique:clubbers',
-          'address' => 'required',
-          'dob' => 'required'
+          //'lastName' => 'required',
+          'mobileNo' =>'required|size:10|unique:luggers',
+          //'address' => 'required',
+          //'dob' => 'required'
+          'user_id' => 'required'
         ];
     }
 

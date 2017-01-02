@@ -13,4 +13,7 @@ class Lugger extends Model
     public function User(){
       return $this->belongsTo('App\User');
     }
+    public function Log(){
+      return $this->HasMany('App\Log');
+    }
 }

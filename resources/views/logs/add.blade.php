@@ -6,7 +6,7 @@
       <h1>Lugger Log</h2>
   </div>
 </div>
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="{{ url('log\insert')}}">
 
   <div class="form-group">
     <label class="control-label col-sm-2">Lugger's Name</label>
@@ -59,8 +59,29 @@
           <input name="sharing" value="yes" type="radio">Yes
         </label>
         <label class="radio-inline">
-          <input name="sharing" value="yes" type="radio">No
+          <input name="sharing" value="no" type="radio">No
         </label>
+      </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2">Venue</label>
+    <div class="col-sm-10">
+      <input name="venue" type="text" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-sm-2">Comments</label>
+    <div class="col-sm-10">
+      <input name="comments" type="text" class="form-control">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-2">
+        <button type="submit" class="btn btn-default">Submit</button>
+    </div>
   </div>
 
 </form>

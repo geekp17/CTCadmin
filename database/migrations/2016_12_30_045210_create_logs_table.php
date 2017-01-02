@@ -17,10 +17,13 @@ class CreateLogsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('lugger_id');
-            $table->string('venue');
-            $table->date('date');
-            $table->string('other');
-            $table->string('studyTaken')
+            $table->string('venue')->nullable();
+            $table->date('date')->nullable();
+            $table->string('meet');
+            $table->string('other')->nullable();
+            $table->string('studyTaken')->nullable();
+            $table->string('comments')->nullable();
+            $table->string('sharing')->nullable();
             $table->timestamps();
         });
     }

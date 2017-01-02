@@ -30,4 +30,8 @@ class User extends Authenticatable
     public function Lugger(){
       return $this->hasMany('App\Lugger');
     }
+
+    public function Log(){
+      return  $this->hasMany('App\Log');
+    }
 }

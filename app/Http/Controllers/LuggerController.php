@@ -27,6 +27,8 @@ class LuggerController extends Controller
       $lugger->address = strtoupper($request->input('address'));
       $lugger->user_id = $request->input('user_id');
       $lugger->save();
+      $LogController = new LogController();
+      $LogController->create($lugger->id, $lugger->user_id);
       return redirect()->action('LuggerController@add')->with('status', 'Yey, New lugger added!');
     }
 

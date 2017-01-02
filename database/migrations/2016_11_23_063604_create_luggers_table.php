@@ -16,10 +16,10 @@ class CreateLuggersTable extends Migration
         Schema::create('luggers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('firstName');
-            $table->string('lastName');
+            $table->string('lastName')->nullable();
             $table->string('mobileNo')->unique();
-            $table->date('dob');
-            $table->string('address');
+            $table->date('dob')->nullable();
+            $table->string('address')->nullable();
             $table->integer('user_id');
             $table->timestamps();
         });
