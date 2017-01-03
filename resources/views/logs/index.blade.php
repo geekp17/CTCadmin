@@ -8,10 +8,10 @@ $log1 = $lugger->Log()->where([
     ['lugger_id', '=', $lugger->id],
     ['meet', '=', $meet],
     ])->first();
-$efforts1 = new App\Effort()->where('log_id', '=', $log1->id)->get();
+$efforts1 = $log1->Effort()->get();
 $effort1 = "";
-foreach($efforts2 as $effort) {
-  $effort1 = $effort1."<br>".$effort;
+foreach($efforts1 as $effort) {
+  $effort1 = $effort1."\n".$effort->efforts;
 }
 
 $meet = date("n").'-'.date("y").'meet2';
@@ -19,10 +19,10 @@ $log2 = $lugger->Log()->where([
     ['lugger_id', '=', $lugger->id],
     ['meet', '=', $meet],
     ])->first();
-$efforts2 = new App\Effort()->where('log_id', '=', $log2->id)->get();
+$efforts2 = $log2->Effort()->get();;
 $effort2 = "";
-foreach($efforts1 as $effort) {
-  $effort2 = $effort2."<br>".$effort;
+foreach($efforts2 as $effort) {
+  $effort2 = $effort2."\n".$effort->efforts;
 }
 
 $meet = date("n").'-'.date("y").'meet3';
@@ -30,10 +30,10 @@ $log3 = $lugger->Log()->where([
     ['lugger_id', '=', $lugger->id],
     ['meet', '=', $meet],
     ])->first();
-$efforts3 = new App\Effort()->where('log_id', '=', $log3->id)->get();
+$efforts3 = $log3->Effort()->get();
 $effort3 = "";
 foreach($efforts3 as $effort) {
-  $effort3 = $effort3."<br>".$effort;
+  $effort3 = $effort3."\n".$effort->efforts;
 }
 
 
@@ -42,10 +42,10 @@ $log4 = $lugger->Log()->where([
     ['lugger_id', '=', $lugger->id],
     ['meet', '=', $meet],
     ])->first();
-$efforts4 = new App\Effort()->where('log_id', '=', $log4->id)->get();
+$efforts4 = $log4->Effort()->get();
 $effort4 = "";
 foreach($efforts4 as $effort) {
-  $effort4 = $effort4."<br>".$effort;
+  $effort4 = $effort4."\n".$effort->efforts;
 }
 
 @endphp
@@ -67,10 +67,10 @@ foreach($efforts4 as $effort) {
   <tbody>
     <tr>
       <th>Effort Made to Meet</th>
-      <th>{{$efort1}}</th>
-      <th>{{$efort2}}</th>
-      <th>{{$efort3}}</th>
-      <th>{{$efort4}}</th>
+      <th><pre>{{$effort1}}</pre></th>
+      <th>{{$effort2}}</th>
+      <th>{{$effort3}}</th>
+      <th>{{$effort4}}</th>
     </tr>
     <tr>
       <th>Date</th>

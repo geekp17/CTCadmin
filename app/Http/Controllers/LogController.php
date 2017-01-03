@@ -13,25 +13,23 @@ use App\Request\InsertLog;
 class LogController extends Controller
 {
     public function edit($id){
-      $log = new Log()->where(['id', '=', $id])->first();
-      if(is_null($log->date())) {
-        return view('logs.add')->with('log', $log);
-      }
+      $log = new Log();
+      $log = $log->where('id', $id)->first();
+      return view('logs.add')->with('log', $log);
 
     }
 
     public function insert(Request $request){
       $log = new Log();
+      $log = $log->where('id', $request->input('log_id'))->first();
       $effort = new Effort();
-      $log->user_id = Auth::id();
-      $log->lugger_id = $request->input('lugger_id');
       $log->venue = $request->input('venue');
       $log->date = $request->input('date');
       $log->other = $request->input('other');
       $log->studyTaken = $request->input('studyTaken');
       $log->comments = $request->input('comments');
       $log->save();
-      $effort->log_id = $log->id;
+      $effort->log_id = $request->input('log_id');
       $effort->efforts = $request->input('efforts');
       $effort->save();
     }

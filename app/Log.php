@@ -13,4 +13,8 @@ class Log extends Model
     public function User(){
       return $this->belongsTo('App\User');
     }
+
+    public function Effort(){
+      return $this->hasMany('App\Effort');
+    }
 }
