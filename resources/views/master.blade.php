@@ -15,10 +15,10 @@
            <a class="navbar-brand" href="/">CTC Admin Panel</a>
          </div>
          <ul class="nav navbar-nav">
-           <li><a href="#">Home</a></li>
-           <li><a href="#">Lugger</a></li>
-           <li><a href="#">Clubber</a></li>
-           <li><a href="#">Log</a></li>
+           <li><a href="{{ url('/')}}">Home</a></li>
+           <li><a href="{{ url('/lugger')}}">Lugger</a></li>
+           <li><a href="{{url ('/clubber')}}">Clubber</a></li>
+           <li><a href="{{url('/log')}}">Log</a></li>
          </ul>
          @if (Auth::check())
          <ul class="nav navbar-nav navbar-right">

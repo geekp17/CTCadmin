@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::get('/lugger', 'LuggerController@index')->middleware('auth');;
 Route::get('/lugger/{id}/edit', 'LuggerController@edit')->middleware('auth');
