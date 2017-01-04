@@ -38,4 +38,10 @@ class ClubberController extends Controller
       $lugger->save();
       return redirect()->action('LuggerController@add')->with('status', 'Yey, New lugger added!');
     }
+
+    public function index(){
+      $clubbers = new Clubber();
+      $clubbers = $clubbers->all();
+      return view('clubbers.index')->with('clubbers', $clubbers);
+    }
 }

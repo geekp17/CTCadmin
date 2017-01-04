@@ -16,7 +16,6 @@ class LogController extends Controller
       $log = new Log();
       $log = $log->where('id', $id)->first();
       return view('logs.add')->with('log', $log);
-
     }
 
     public function insert(Request $request){
@@ -24,7 +23,11 @@ class LogController extends Controller
       $log = $log->where('id', $request->input('log_id'))->first();
       $effort = new Effort();
       $log->venue = $request->input('venue');
-      $log->date = $request->input('date');
+      if ($request->input('date') == '') {
+        $log->date = NULL;
+      } else {
+        $log->date = $request->input('date');
+      }
       $log->other = $request->input('other');
       $log->studyTaken = $request->input('studyTaken');
       $log->comments = $request->input('comments');
@@ -32,6 +35,7 @@ class LogController extends Controller
       $effort->log_id = $request->input('log_id');
       $effort->efforts = $request->input('efforts');
       $effort->save();
+      return redirect()->action('LogController@index');
     }
 
     public function index(){
@@ -41,7 +45,7 @@ class LogController extends Controller
       return view('logs.index')->with('luggers', $luggers);
     }
 
-    public function create($user_id, $lugger_id){
+    public function create($lugger_id, $user_id){
 
       for ($i = 1; $i<13; $i++) {
         for ($k = 1; $k<5; $k++){

@@ -14,11 +14,14 @@
    <tbody>
      @foreach ($luggers as $lugger)
      <tr>
-       <th>{{ $lugger->firstName}}</th>
-       <th>{{ $lugger->lastName}}</th>
+       <th>{{ ucfirst(strtolower($lugger->firstName))}}</th>
+       <th>{{ ucfirst(strtolower($lugger->lastName))}}</th>
        <th>{{ $lugger->mobileNo}}</th>
        <th>{{ $lugger->address}}</th>
-       <th><a class="btn btn-primary" href="{{action('LuggerController@edit', ['id' => $lugger->id])}}">Edit</a><a class="btn btn-danger" href="{{action('LuggerController@edit', ['id' => $lugger->id])}}">Delete</a></th>
+       <th>
+         <a class="btn btn-primary" href="{{action('LuggerController@edit', ['id' => $lugger->id])}}">Edit</a>
+         <!-- <a class="btn btn-danger" href="{{action('LuggerController@edit', ['id' => $lugger->id])}}">Delete</a> -->
+       </th>
 
      </tr>
       @endforeach

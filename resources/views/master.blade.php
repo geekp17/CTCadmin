@@ -16,8 +16,22 @@
          </div>
          <ul class="nav navbar-nav">
            <li><a href="{{ url('/')}}">Home</a></li>
-           <li><a href="{{ url('/lugger')}}">Lugger</a></li>
-           <li><a href="{{url ('/clubber')}}">Clubber</a></li>
+           <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lugger
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url('/lugger/add')}}">Add</a></li>
+                <li><a href="{{url('/lugger')}}">Show All</a></li>
+              </ul>
+          </li>
+          <li class="dropdown">
+             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clubber
+             <span class="caret"></span></a>
+             <ul class="dropdown-menu">
+               <li><a href="{{ url('/clubber/add')}}">Add</a></li>
+               <li><a href="{{url('/clubber')}}">Show All</a></li>
+             </ul>
+         </li>
            <li><a href="{{url('/log')}}">Log</a></li>
          </ul>
          @if (Auth::check())

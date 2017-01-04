@@ -22,6 +22,7 @@ class CreateClubbersTable extends Migration
           $table->string('address');
           $table->integer('lugger_id')->nullable();
           $table->timestamps();
+          $table->string('instagram')->nullable();
         });
     }
 

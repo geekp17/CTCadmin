@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\InsertLugger;
 use App\Lugger;
+use Auth;
 
 class LuggerController extends Controller
 {
     public function edit($id){
       $lugger = new Lugger();
-      $lugger = $lugger->find($id);
+      $lugger = $lugger->find($id)->first();
       return view('luggers.edit')->with('lugger', $lugger);
     }
 
@@ -26,6 +27,7 @@ class LuggerController extends Controller
       $lugger->dob = $request->input('dob');
       $lugger->address = strtoupper($request->input('address'));
       $lugger->user_id = $request->input('user_id');
+      //$lugger->instagram = $request->input('instagram');
       $lugger->save();
       $LogController = new LogController();
       $LogController->create($lugger->id, $lugger->user_id);
@@ -33,8 +35,7 @@ class LuggerController extends Controller
     }
 
     public function index(){
-      $luggers = new Lugger();
-      $luggers = $luggers->all();
+      $luggers = Auth::user()->Lugger()->get();
       return view('luggers.index')->with('luggers', $luggers);
     }
 }

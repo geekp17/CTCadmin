@@ -22,6 +22,7 @@ Route::post('/lugger/insert', 'LuggerController@insert')->middleware('auth');
 Route::get('/clubber/add', 'ClubberController@add')->middleware('auth');
 Route::post('/clubber/insert', "ClubberController@insert")->middleware('auth');
 Route::post('/clubber/levelUp', "ClubberController@levelUp")->middleware('auth');
+Route::get('/clubber', 'ClubberController@index')->middleware('auth');
 
 Route::get('/log/edit/{id}', 'LogController@edit')->middleware('auth');
 Route::post('/log/insert', 'LogController@insert')->middleware('auth');
