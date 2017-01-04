@@ -21,8 +21,8 @@ class CreateLuggersTable extends Migration
             $table->date('dob')->nullable();
             $table->string('address')->nullable();
             $table->integer('user_id');
-            $table->string('instagram');
-            $table->timestamps()->nullable();
+            $table->string('instagram')nullable();
+            $table->timestamps()->;
         });
     }
 
