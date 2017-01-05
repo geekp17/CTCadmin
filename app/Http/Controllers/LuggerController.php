@@ -27,7 +27,7 @@ class LuggerController extends Controller
       $lugger->dob = $request->input('dob');
       $lugger->address = strtoupper($request->input('address'));
       $lugger->user_id = $request->input('user_id');
-      //$lugger->instagram = $request->input('instagram');
+      $lugger->instagram = $request->input('instagram');
       $lugger->save();
       $LogController = new LogController();
       $LogController->create($lugger->id, $lugger->user_id);

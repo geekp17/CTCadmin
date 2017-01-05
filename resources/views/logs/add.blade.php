@@ -33,8 +33,8 @@
     <label class="control-label col-sm-2">Who else turned up?</label>
     <div class="col-sm-10">
         @foreach ( $log->User->getLuggers() as $lugger)
-        <label id="{{$lugger->id}}" class="checkbox-inline">
-          <input name="other[]" type="checkbox" value="{{$lugger->id}}">{{ucfirst(strtolower($lugger->firstName))}}
+        <label  class="checkbox-inline">
+          <input name="other[]" type="checkbox" value="{{ucfirst(strtolower($lugger->firstName))}}">{{ucfirst(strtolower($lugger->firstName))}}
         </label>
         @endforeach
     </div>
@@ -98,15 +98,4 @@
   </div>
 
 </form>
-<script>
-z = 0;
-function report(x){
-  z++;
-  var y = document.getElementById(x);
-  y.style.display='none';
-  if (z > 1){
-    window.location.reload();
-  }
-}
-</script>
 @stop
