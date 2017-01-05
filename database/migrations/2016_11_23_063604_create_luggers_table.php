@@ -22,7 +22,7 @@ class CreateLuggersTable extends Migration
             $table->string('address')->nullable();
             $table->integer('user_id');
             $table->string('instagram')->nullable();
-            $table->timestamps()->;
+            $table->timestamps();
         });
     }
 
