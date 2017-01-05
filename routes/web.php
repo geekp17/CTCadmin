@@ -29,3 +29,10 @@ Route::post('/log/insert', 'LogController@insert')->middleware('auth');
 Route::get('/log', 'LogController@index')->middleware('auth');
 
 Auth::routes();
+
+Route::get('send_test_email', function(){
+	Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
+	{
+		$message->to('head.fmf.reaper@gmail.com');
+	});
+});
