@@ -47,7 +47,7 @@
 							<div class="form-group">
 								<label class="control-label col-sm-2">Lug Leader</label>
 								<div class="col-sm-10">
-									<input class="form-control" name="user_id" type="text" value="{{ Auth:id() }}" readonly>
+									<input class="form-control" name="user_id" type="text" value="{{ Auth::id() }}" readonly>
 									</div>
 								</div>
 								<div class="form-group">
