@@ -29,10 +29,12 @@ class LogController extends Controller
         $log->date = $request->input('date');
       }
       $others ="";
-      foreach ($request->input('other') as $other){
-        $others = $others." ".$other;
+      if ($request->input('other') != ""){
+        foreach ($request->input('other') as $other){
+          $others = $others." ".$other;
+        }
+        $log->other = $others;
       }
-      $log->other = $others;
       $log->studyTaken = $request->input('studyTaken');
       $log->comments = $request->input('comments');
       $log->save();
