@@ -20,7 +20,6 @@ class HttpInterface
     {
         if (!$this->parent->isLoggedIn && !$login) {
             throw new InstagramException("Not logged in\n");
-
             return;
         }
 
@@ -97,7 +96,6 @@ class HttpInterface
             $this->parent->settings->set('cookies', $newCookies);
         }
 
-
         if ($httpCode == 429 && $flood_wait) {
             if ($this->parent->debug) {
                 echo "Too many requests! Sleeping 2s\n";
@@ -151,7 +149,7 @@ class HttpInterface
         } elseif (!is_null($customPreview)) {
             $fileToUpload = file_get_contents($customPreview);
         } else {
-            $upload_id = number_format(round(microtime(true) * 1000), 0, '', '');
+            $upload_id = Utils::generateUploadId();
             $fileToUpload = file_get_contents($photo);
         }
 
@@ -180,7 +178,7 @@ class HttpInterface
                 'type'     => 'form-data',
                 'name'     => 'photo',
                 'data'     => $fileToUpload,
-                'filename' => 'pending_media_'.number_format(round(microtime(true) * 1000), 0, '', '').'.jpg',
+                'filename' => 'pending_media_'.Utils::generateUploadId().'.jpg',
                 'headers'  => [
                     'Content-Transfer-Encoding: binary',
                     'Content-Type: application/octet-stream',
@@ -256,7 +254,6 @@ class HttpInterface
         }
         if (!$upload->isOk()) {
             throw new InstagramException($upload->getMessage());
-
             return;
         }
 
@@ -281,7 +278,7 @@ class HttpInterface
 
         $endpoint = 'upload/video/';
         $boundary = $this->parent->uuid;
-        $upload_id = round(microtime(true) * 1000);
+        $upload_id = Utils::generateUploadId();
         $bodies = [
             [
                 'type' => 'form-data',
@@ -782,6 +779,123 @@ class HttpInterface
         }
     }
 
+    public function direct_photo($recipients, $filepath, $text)
+    {
+        if (!is_array($recipients)) {
+            $recipients = [$recipients];
+        }
+
+        $string = [];
+        foreach ($recipients as $recipient) {
+            $string[] = "\"$recipient\"";
+        }
+
+        $recipient_users = implode(',', $string);
+
+        $endpoint = 'direct_v2/threads/broadcast/upload_photo/';
+        $boundary = $this->parent->uuid;
+        $photo = file_get_contents($filepath);
+
+        $bodies = [
+            [
+                'type' => 'form-data',
+                'name' => 'recipient_users',
+                'data' => "[[$recipient_users]]",
+            ],
+            [
+                'type' => 'form-data',
+                'name' => 'client_context',
+                'data' => $this->parent->uuid,
+            ],
+            [
+                'type' => 'form-data',
+                'name' => 'thread_ids',
+                'data' => '["0"]',
+            ],
+            [
+                'type'     => 'form-data',
+                'name'     => 'photo',
+                'data'     => $photo,
+                'filename' => 'photo',
+                'headers'  => [
+                    'Content-Type: '.mime_content_type($filepath),
+                    'Content-Transfer-Encoding: binary',
+                ],
+            ],
+            [
+                'type' => 'form-data',
+                'name' => 'text',
+                'data' => is_null($text) ? '' : $text,
+            ],
+        ];
+
+        $data = $this->buildBody($bodies, $boundary);
+        $headers = [
+            'Proxy-Connection: keep-alive',
+            'Connection: keep-alive',
+            'Accept: */*',
+            'Content-Type: multipart/form-data; boundary='.$boundary,
+            'Content-Length: '.strlen($data),
+            'Connection: keep-alive',
+            'Accept-Language: en-en',
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, Constants::API_URL.$endpoint);
+        curl_setopt($ch, CURLOPT_USERAGENT, $this->userAgent);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_VERBOSE, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->verifyPeer);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $this->verifyHost);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        if ($this->parent->settingsAdopter['type'] == 'file') {
+            curl_setopt($ch, CURLOPT_COOKIEFILE, $this->parent->settings->cookiesPath);
+            curl_setopt($ch, CURLOPT_COOKIEJAR, $this->parent->settings->cookiesPath);
+        } else {
+            $cookieJar = $this->parent->settings->get('cookies');
+            $cookieJarFile = tempnam(sys_get_temp_dir(), uniqid('_instagram_cookie'));
+
+            file_put_contents($cookieJarFile, $cookieJar);
+
+            curl_setopt($ch, CURLOPT_COOKIEJAR, $cookieJarFile);
+            curl_setopt($ch, CURLOPT_COOKIEFILE, $cookieJarFile);
+        }
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+        if ($this->proxy) {
+            curl_setopt($ch, CURLOPT_PROXY, $this->proxy['host'].':'.$this->proxy['port']);
+            if ($this->proxy['username']) {
+                curl_setopt($ch, CURLOPT_PROXYUSERPWD, $this->proxy['username'].':'.$this->proxy['password']);
+            }
+        }
+
+        $resp = curl_exec($ch);
+        $header_len = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+        $header = substr($resp, 0, $header_len);
+        $upload = json_decode(substr($resp, $header_len), true);
+
+        if ($this->parent->debug) {
+            Debug::printRequest('POST', $endpoint);
+
+            $uploadBytes = Utils::formatBytes(curl_getinfo($ch, CURLINFO_SIZE_UPLOAD));
+            Debug::printUpload($uploadBytes);
+
+            $bytes = Utils::formatBytes(curl_getinfo($ch, CURLINFO_SIZE_DOWNLOAD));
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            Debug::printHttpCode($httpCode, $bytes);
+            Debug::printResponse(substr($resp, $header_len));
+        }
+
+        curl_close($ch);
+        if ($this->parent->settingsAdopter['type'] == 'mysql') {
+            $newCookies = file_get_contents($cookieJarFile);
+            $this->parent->settings->set('cookies', $newCookies);
+        }
+    }
+
     protected function buildBody($bodies, $boundary)
     {
         $body = '';
@@ -790,7 +904,7 @@ class HttpInterface
             $body .= 'Content-Disposition: '.$b['type'].'; name="'.$b['name'].'"';
             if (isset($b['filename'])) {
                 $ext = pathinfo($b['filename'], PATHINFO_EXTENSION);
-                $body .= '; filename="'.'pending_media_'.number_format(round(microtime(true) * 1000), 0, '', '').'.'.$ext.'"';
+                $body .= '; filename="'.'pending_media_'.Utils::generateUploadId().'.'.$ext.'"';
             }
             if (isset($b['headers']) && is_array($b['headers'])) {
                 foreach ($b['headers'] as $header) {

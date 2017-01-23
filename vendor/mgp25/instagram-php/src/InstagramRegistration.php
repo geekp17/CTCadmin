@@ -15,6 +15,8 @@ class InstagramRegistration
     protected $proxy = null;     // Full Proxy
     protected $proxyHost = null; // Proxy Host and Port
     protected $proxyAuth = null; // Proxy User and Pass
+    protected $settingsAdopter = ['type'     => 'file',
+        'path'                               => __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR, ]; // File | Mysql
 
     public function __construct($debug = false, $IGDataPath = null)
     {
@@ -80,14 +82,14 @@ class InstagramRegistration
      */
     public function checkUsername($username)
     {
-        $data = json_encode([
-            '_uuid'      => $this->uuid,
-            'username'   => $username,
-            '_csrftoken' => 'missing',
-        ]);
-
         $this->username = $username;
-        $this->settings = new Settings($this->IGDataPath.$username.DIRECTORY_SEPARATOR.'settings-'.$username.'.dat');
+        $this->settings = new SettingsAdapter($this->settingsAdopter, $username);
+
+        $data = json_encode([
+            'username'        => $username,
+            '__uuid'          => $this->uuid,
+            '_csrftoken'      => 'missing',
+        ]);
 
         return new CheckUsernameResponse($this->request('users/check_username/', SignatureUtils::generateSignature($data))[1]);
     }
@@ -168,7 +170,11 @@ class InstagramRegistration
     {
         $fetch = $this->request('si/fetch_headers/', null, true);
         $header = $fetch[0];
-        $response = new ChallengeResponse($fetch[1]);
+
+        $mapper = new \JsonMapper();
+        $mapper->bStrictNullTypes = false;
+        $mapper->bEnforceMapType = false;
+        $response = $mapper->map($fetch[1], new ChallengeResponse());
 
         if (!isset($header) || (!$response->isOk())) {
             throw new InstagramException("Couldn't get challenge, check your connection");

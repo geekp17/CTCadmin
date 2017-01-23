@@ -32,6 +32,12 @@
   							<input class="form-control" name="instagram" type="text">
   							</div>
   						</div>
+							<div class="form-group">
+	  						<label class="control-label col-sm-2">Snapchat Username</label>
+	  						<div class="col-sm-10">
+	  							<input class="form-control" name="snapchat" type="text">
+	  							</div>
+	  						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2">Date of Birth (MM/DD/YYY)</label>
 							<div class="col-sm-10">

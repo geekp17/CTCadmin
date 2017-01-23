@@ -59,12 +59,15 @@ class Item extends Response
      */
     public $likers = '';
     public $like_count = 0;
+    /**
+     * @var string[]
+     */
     public $preview = '';
     public $has_liked = false;
     public $explore_context = '';
     public $explore_source_token = '';
     /**
-     * @var Explore|string
+     * @var Explore|null
      */
     public $explore = '';
     public $impression_token = '';
@@ -91,13 +94,4 @@ class Item extends Response
     {
         return 'https://www.instagram.com/p/'.$this->getCode().'/';
     }
-}
-
-
-class Image_Versions2 extends Response
-{
-    /**
-     * @var HdProfilePicUrlInfo[]
-     */
-    public $candidates;
 }

@@ -68,9 +68,9 @@ foreach($efforts4 as $effort) {
     <tr>
       <th>Effort Made to Meet</th>
       <th><pre>{{$effort1}}</pre></th>
-      <th>{{$effort2}}</th>
-      <th>{{$effort3}}</th>
-      <th>{{$effort4}}</th>
+      <th><pre>{{$effort2}}</pre></th>
+      <th><pre>{{$effort3}}</pre></th>
+      <th><pre>{{$effort4}}</pre></th>
     </tr>
     <tr>
       <th>Date</th>

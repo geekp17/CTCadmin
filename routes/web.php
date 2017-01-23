@@ -15,9 +15,11 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/lugger', 'LuggerController@index')->middleware('auth');;
-Route::get('/lugger/{id}/edit', 'LuggerController@edit')->middleware('auth');
+Route::get('/lugger/{id}/edit', 'LuggerController@edit');
 Route::get('/lugger/add', 'LuggerController@add')->middleware('auth');
 Route::post('/lugger/insert', 'LuggerController@insert')->middleware('auth');
+Route::post('/lugger/update', 'LuggerController@update');
+Route::get('/lugger/thankyou', 'LuggerController@thankyou');
 
 Route::get('/clubber/add', 'ClubberController@add')->middleware('auth');
 Route::post('/clubber/insert', "ClubberController@insert")->middleware('auth');

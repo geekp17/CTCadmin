@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\InsertLog;
 use App\Lugger;
 use App\User;
 use App\Log;
 use Auth;
 use App\Effort;
-use App\Request\InsertLog;
+
 
 class LogController extends Controller
 {
@@ -18,7 +19,7 @@ class LogController extends Controller
       return view('logs.add')->with('log', $log);
     }
 
-    public function insert(Request $request){
+    public function insert(InsertLog $request){
       $log = new Log();
       $log = $log->where('id', $request->input('log_id'))->first();
       $effort = new Effort();

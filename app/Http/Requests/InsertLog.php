@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class InsertLog extends FormRequest
 {
     /**
@@ -24,11 +25,7 @@ class InsertLog extends FormRequest
     public function rules()
     {
         return [
-            'lugger_id' => 'required',
-            'venue' => 'required',
-            'date' => 'required',
-            'studyTaken' => 'required',
-            'efforts' => 'required'
+            'efforts' => 'required|max:255'
         ];
     }
 }
