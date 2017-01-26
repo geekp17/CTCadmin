@@ -38,4 +38,9 @@ class User extends Authenticatable
     public function getLuggers() {
       return $this->Lugger()->get();
     }
+
+    public function routeNotificationForInstagram(){
+      return $this->email;
+    }
+
 }

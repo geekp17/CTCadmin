@@ -6,9 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddInstagramToUsers' => $baseDir . '/database/migrations/2017_01_26_071923_add_instagram_to_users.php',
     'AddSnapchatToLuggers' => $baseDir . '/database/migrations/2017_01_23_060433_add_snapchat_to_luggers.php',
     'CreateClubbersTable' => $baseDir . '/database/migrations/2016_12_21_085429_create_clubbers_table.php',
     'CreateEffortsTable' => $baseDir . '/database/migrations/2016_12_30_050537_create_efforts_table.php',
+    'CreateJobsTable' => $baseDir . '/database/migrations/2017_01_26_063247_create_jobs_table.php',
     'CreateLogsTable' => $baseDir . '/database/migrations/2016_12_30_045210_create_logs_table.php',
     'CreateLuggersTable' => $baseDir . '/database/migrations/2016_11_23_063604_create_luggers_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
