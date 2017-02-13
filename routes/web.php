@@ -38,7 +38,4 @@ Route::get('send_test_email', function(){
 		$message->to('head.fmf.reaper@gmail.com');
 	});
 });
-
-Route::get('/instagram', 'InstagramController@send');
-
-Route::get('/send/instagram', 'SendController@instagram');
+Route::get('/send/instagram', 'SendController@lol');

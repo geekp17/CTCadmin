@@ -310,6 +310,7 @@ class ComposerStaticInitdeba3c5af53d259791853139169c8bf1
         'AddSnapchatToLuggers' => __DIR__ . '/../..' . '/database/migrations/2017_01_23_060433_add_snapchat_to_luggers.php',
         'CreateClubbersTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_21_085429_create_clubbers_table.php',
         'CreateEffortsTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_30_050537_create_efforts_table.php',
+        'CreateEventsTable' => __DIR__ . '/../..' . '/database/migrations/2017_02_01_085819_create_events_table.php',
         'CreateJobsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_26_063247_create_jobs_table.php',
         'CreateLogsTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_30_045210_create_logs_table.php',
         'CreateLuggersTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_23_063604_create_luggers_table.php',

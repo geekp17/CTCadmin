@@ -10,6 +10,7 @@ return array(
     'AddSnapchatToLuggers' => $baseDir . '/database/migrations/2017_01_23_060433_add_snapchat_to_luggers.php',
     'CreateClubbersTable' => $baseDir . '/database/migrations/2016_12_21_085429_create_clubbers_table.php',
     'CreateEffortsTable' => $baseDir . '/database/migrations/2016_12_30_050537_create_efforts_table.php',
+    'CreateEventsTable' => $baseDir . '/database/migrations/2017_02_01_085819_create_events_table.php',
     'CreateJobsTable' => $baseDir . '/database/migrations/2017_01_26_063247_create_jobs_table.php',
     'CreateLogsTable' => $baseDir . '/database/migrations/2016_12_30_045210_create_logs_table.php',
     'CreateLuggersTable' => $baseDir . '/database/migrations/2016_11_23_063604_create_luggers_table.php',

@@ -25,10 +25,7 @@ class InsertClubber extends FormRequest
     {
         return [
             'firstName' => 'required',
-            'lastName' => 'required',
-            'mobileNo' =>'required|size:10|unique:clubbers',
-            'address' => 'required',
-            'dob' => 'required'
+            'mobileNo' =>'size:10|unique:clubbers',
         ];
     }
 

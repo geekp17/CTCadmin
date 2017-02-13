@@ -35,10 +35,17 @@ class MassInstagram implements ShouldQueue
      */
     public function handle()
     {
-      Log::info('Start'.$this->lugger->instagram);
-      $usernameId = $this->instagram->getUsernameId($this->lugger->instagram);
-      $dm = $this->instagram->direct_message($usernameId, $this->message);
-      Log::info('End'.$this->lugger->instagram);
+      Log::info('Start '.$this->lugger->instagram);
+      try {
+        $usernameId = $this->instagram->getUsernameId($this->lugger->instagram);
+      } catch(InstagramException $e){
+        Log::info($e->getMessage());
+      }
+      try {
+        $dm = $this->instagram->direct_message($usernameId, $this->message);
+      } catch(InstagramException $e) {
+      }
+      Log::info('End '.$this->lugger->instagram);
 
     }
 }
