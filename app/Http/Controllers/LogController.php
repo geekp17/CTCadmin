@@ -63,7 +63,16 @@ class LogController extends Controller
           $log->save();
         }
       }
+    }
 
+    public function all($user_id, $month){
+      $user = User::find($user_id);
+      $luggers = $user->Lugger()->get();
+      return view('logs.all', ['luggers' => $luggers, 'month' => $month]);
+    }
 
+    public function view(){
+      $users = User::get();
+      return view('logs.view')->with('users', $users);
     }
 }
